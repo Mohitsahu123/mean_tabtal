@@ -1,0 +1,41 @@
+
+<div class="container-fluid" ng-init="getallCompanyData()">
+    <div class="hidden-xs">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="profile-card">
+                <div class="profile-details clearfix">
+                    <img src="../assets/images/profile_img.png" class="profile-logo">
+                    <div class="profile-info">
+                        <h2 class="profile-title">{{$root.user.firstName}} {{$root.user.lastName}}</h2>
+                        <div class="profile-contact-wrapper">
+                            <p class="contact-item">
+                                <span class="glyphicon glyphicon-envelope contact-icon"></span> {{$root.user.username}}</p>
+                            <p class="contact-item">
+                                <span class="glyphicon glyphicon-user contact-icon"></span> live:skypeid</p>
+                            <p class="contact-item">
+                                <span class="glyphicon glyphicon-earphone contact-icon"></span> 3807-77-88-99</p>
+                        </div>
+                        <div class="profile-extra-wrapper">
+                            <div class="wallet-div">
+                                <p class="extra-text">Wallet </p>
+                                <p class="extra-value"> : 1000</p>
+                            </div>
+                            <div class="verified-div">
+                                <p class="extra-value">Verified</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button ui-sref="app.register" type="button" class="btn btn-primary btn-outline btn-share">Edit Profile</button>
+            </div>
+
+         
+
+        </div>
+    </div>
+    
+    
+    
+</div>
+

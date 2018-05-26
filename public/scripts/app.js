@@ -39,7 +39,19 @@ tabtalent.config(function ($stateProvider, $urlRouterProvider, $locationProvider
             }
         })
 
-     
+        .state('app.profile',{
+            url:'profile',
+            views: {
+                'header@': {
+                    templateUrl: '../template/header/header.component.html',
+                    controller: 'HeaderController'
+                },
+                'content@': {
+                    templateUrl: '../template/profile/profile.component.html',
+                    controller: 'ProfileController'
+                }
+            }
+        })
 
         .state('app.company',{
             url:'company',

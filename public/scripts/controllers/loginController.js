@@ -4,7 +4,7 @@ tabtalent.controller('LoginController', ['$http', '$scope', '$stateParams', '$st
 
         $http.post('/users/login', $scope.cred).then(function (res) {
             $rootScope.user = res.data.user;
-            $state.go('company');
+            $state.go('app.profile');
         }, function (error) {
             $scope.message = error.data.message;
         });
