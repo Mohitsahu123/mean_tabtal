@@ -55,7 +55,14 @@ userRouter.route('/login')
                 return res.status(500).send(err);
             }
 
-           
+            if (info) {
+                return res.status(401).send(info);
+            }
+
+            if(!user) {
+                return res.status(401).send(info);
+            }
+
             req.logIn(user, function (err) {
                 if (err){
                     return res.status(500).send(err);
@@ -66,35 +73,46 @@ userRouter.route('/login')
                     if (err) {
                         return res.status(500).send(err);
                     }else{
-                         Skills.find({user_id: user.id}).lean().exec( function (err, skills) {
-                            if (err) {
-                                return res.status(500).send(err);
-                            }else{
-                                Educations.find({user_id: user.id}).lean().exec( function (err, edu) {
-                                    if (err) {
-                                        return res.status(500).send(err);
-                                    }else{
-                                         
+                                      
                                          var userForMap = JSON.parse(JSON.stringify(user));
-                                        const obj = Object.assign({experiences: exp, skills:skills, educations:edu }, userForMap);
+                                        const obj = Object.assign({experiences: exp }, userForMap);
                                          return res.status(200).send({
                                             message: 'Login successful',
                                             success: true,
                                             user: obj,
                                             token: token
                                         });
-                                    }
-                                    
-                                }) 
-                            }
-                            
-                        })
+                                  
                     }
                     
                 });
            
         })(req, res, next);
     });
+
+userRouter.route('/update')
+
+    .put(function (req, res, next) {
+        var exp = req.body.experiences;
+        var expArr = [];
+       
+                    User.findOneAndUpdate({_id: req.body._id}, req.body, {new : true, upsert:true}, function (err, userRes) {
+                        if (err) {
+                            return res.status(500).send(err);
+                        }else{
+                            var userForMap = JSON.parse(JSON.stringify(userRes));
+                             const obj = Object.assign({experiences: expArr }, userForMap);
+                          console.log("\r\n\\n obj ", obj, expArr);
+                        return res.status(200).send(obj);
+                        }
+                                  
+                       
+                    })
+               
+       
+    });
+
+
 
 
 module.exports = userRouter;

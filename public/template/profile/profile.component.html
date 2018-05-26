@@ -67,7 +67,37 @@
 
             </div>
 
-          
+            <div class="skills-card">
+                <div class="experience-header">
+                    <h3 class="profile-experience-title">Skills</h3>
+                    <button type="button" data-toggle="modal" data-target="#mySkillModal" style="height:30px; padding: 0; border: 0"><img class="plus-image" style="margin-top: 0" src="../assets/images/plus_img.png"></button>
+                </div>
+
+                <div class="skills-wrapper">
+                    <div class="the-skill" ng-repeat="skill in $root.user.skills track by $index">
+                        <p class="skill-text">{{skill.name}}</p>
+                    </div>
+                </div>
+
+                <div class="btn-showmore-wrapper">
+                    <button type="button" class="btn btn-primary btn-outline">Show More</button>
+                </div>
+            </div>
+
+            <div class="education-card">
+                <div class="experience-header">
+                    <h3 class="profile-experience-title">Education</h3>
+                    <button type="button" data-toggle="modal" data-target="#myEducationModal" style="height:30px; padding: 0; border: 0"><img ng-click="openEducationPopup()" class="plus-image" style="margin-top: 0" src="../assets/images/plus_img.png"></button>
+                </div>
+                <div class="education-info" ng-repeat="education in $root.user.educations">
+                    <h3 class="exp-title">{{education.college}}</h3>
+                    <p class="exp-subtitle">{{education.status}}, {{education.course}}, {{education.dateFrom}} - {{education.dateTo}}</p>
+                    <div class="exp-buttons">
+                        <span ng-click="removeEducation($index)" class="glyphicon glyphicon-remove delete-exp-icon" style="float: right; top: -20px;"></span>
+                    </div>
+                </div>
+
+            </div>
 
             <br>
             <br>
@@ -79,6 +109,142 @@
     </div>
     
     
+    <div class="visible-xs">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="profile-card">
+                <div class="center-block">
+                    <img src="../assets/images/profile_img.png" class="profile-logo-xs center-block">
+                    <div>
+                        <h2 class="profile-title text-center">{{$root.user.firstName}} {{$root.user.lastName}}</h2>
+                        <div class="profile-contact-wrapper">
+                            <p class="contact-item-xs">
+                                <span class="glyphicon glyphicon-envelope contact-icon"></span> {{$root.user.username}}</p>
+                            <p class="contact-item-xs">
+                                <span class="glyphicon glyphicon-user contact-icon"></span> live:skypeid</p>
+                            <p class="contact-item-xs">
+                                <span class="glyphicon glyphicon-earphone contact-icon"></span> 3807-77-88-99</p>
+                        </div>
+                        <div class="profile-extra-wrapper">
+                            <div class="wallet-div center-block">
+                                <p class="extra-text">Wallet : 1000</p>
+                            </div>
+                            <div class="verified-div center-block">
+                                <p class="extra-value">Verified</p>
+                            </div>
+                        </div>
+                        <button ui-sref="app.register" type="button" class="btn btn-primary btn-outline center-block" style="margin-top: 20px">Edit Profile</button>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="experience-card-xs">
+                <div class="experience-header">
+                    <h3 class="profile-experience-title">Experience</h3>
+                    <button type="button" data-toggle="modal" data-target="#myModal" style="height:30px; padding: 0; border: 0"><img ng-click="openExperiencePopup()" class="plus-image" style="margin-top: 0" src="../assets/images/plus_img.png"></button>
+
+                </div>
+                <div ng-repeat="experience in $root.user.experiences track by $index">
+                    <div class="the-experience">
+                        <div class="exp-header">
+                            <div class="exp-info">
+                                <h3 class="exp-title">{{experience.jobTitle}}</h3>
+                                <p class="exp-subtitle" ng-if="!experience.linkedTo">{{experience.companyName}}</p>
+                                <a ng-if="experience.linkedTo" ui-sref="app.company">{{experience.companyName}}</a>
+                                <p class="exp-duration">({{experience.dateFrom}} - {{experience.dateTo}})</p>
+                            </div>
+                        </div>
+                        <div class="exp-description-xs">{{experience.desc}}
+                        </div>
+                        <div class="exp-buttons">
+                            <button type="button" class="btn btn-primary btn-outline btn-endo">Request Endorsement</button>
+                            <button type="button" class="btn btn-primary btn-outline btn-endo">Endorsements</button>
+                            <span ng-click="removeExperience($index)" class="glyphicon glyphicon-remove delete-exp-icon"></span>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="btn-showmore-wrapper">
+                    <button type="button" class="btn btn-primary btn-outline">Show More</button>
+                </div>
+
+            </div>
+
+           
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
+        </div>
+    </div>
     
 </div>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <h3 class="profile-experience-title" style="margin-top: 20px">Add Work Experience</h3>
+
+                <div style="margin-bottom:10px;">
+                    <br>
+                    <div class="form-group">
+                        <label for="job">Job Title</label>
+                        <input type="text" class="form-control" ng-model='experience.jobTitle' name="job">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <angucomplete-alt id="name2"
+                                          pause="5"
+                                          selected-object="selectedCompany"
+                                          local-data="companies"
+                                          search-fields="name"
+                                          title-field="name"
+                                          minlength="1"
+                                          input-class="form-control form-control-small"
+                                          override-suggestions="true"
+                                          text-no-results="No companies found"/>
+                        <!--<input type="text" class="form-control" ng-model='experience.companyName' name="company">-->
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" ng-model='experience.location' name="location">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="desc">Description</label>
+                        <textarea type="text" class="form-control" ng-model='experience.desc' name="desc"></textarea>
+                    </div>
+
+                    <div class="datepickers-wrapper">
+                        <div class="form-group">
+                            <label for="datefrom">From</label><br>
+                            <input type="text" class="datepicker datepickerexp" ng-model='experience.dateFrom' name="datefrom"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dateto">To</label><br>
+                            <input type="text" class="datepicker datepickerexp" ng-model='experience.dateTo' name="dateto"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="addExperience()">Add</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 

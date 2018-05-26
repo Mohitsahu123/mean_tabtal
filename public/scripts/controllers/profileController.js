@@ -34,5 +34,36 @@ tabtalent.controller('ProfileController', ['$http', '$scope', '$stateParams', '$
     }
 
     
+    $scope.addExperience = function () {
+        if($scope.selectedCompany){
+            $scope.experience.selectedCompany = $scope.selectedCompany;
+            if(typeof $scope.selectedCompany.originalObject == 'string'){
+                $scope.experience.companyName = $scope.selectedCompany.originalObject;
+                $scope.experience.linkedTo = null;
+                $scope.experience.user_id = null;
+            } else {
+                $scope.experience.companyName = $scope.selectedCompany.originalObject.name;
+                $scope.experience.linkedTo = $scope.selectedCompany.originalObject._id
+                $scope.experience.user_id = $rootScope.user.id;
+            }
+        }
+       
+        $http.post('/users/addExperience', $scope.experience).then(function (res) {
+           $scope.experience = res.data;
+            $rootScope.user.experiences.push($scope.experience);
+            localStorage.setItem('TabTalentUser', JSON.stringify($rootScope.user));
+            $scope.experience = {};
+        })
+    };
+    
+    $scope.removeExperience = function (index) {
+        
+        $http.post('/users/removeExperience', $rootScope.user.experiences[index]).then(function (res) {
+            $rootScope.user.experiences.splice(index, 1);
+            localStorage.setItem('TabTalentUser', JSON.stringify($rootScope.user));
+        })
+    };
+    
   
+    
 }]);
