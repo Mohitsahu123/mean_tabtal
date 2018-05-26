@@ -6,7 +6,9 @@ var async               = require('async');
 var bodyParser = require('body-parser');
 var User = require('../models/user');
 var Counters = require('../models/counters');
-
+var Experiences = require('../models/experiences');
+var Skills = require('../models/skills');
+var Educations = require('../models/educations');
 var Verify = require('./verify');
 var passport = require('passport');
 var ObjectId = require('mongodb').ObjectID;
@@ -60,13 +62,36 @@ userRouter.route('/login')
                 }
             });
             var token = Verify.getToken({"username": user.username, "_id":user._id, "role": user.role});
-             var userForMap = JSON.parse(JSON.stringify(user));
-             return res.status(200).send({
-                message: 'Login successful',
-                success: true,
-                user: userForMap,
-                token: token
-            });
+             Experiences.find({user_id: user.id}).lean().exec( function (err, exp) {
+                    if (err) {
+                        return res.status(500).send(err);
+                    }else{
+                         Skills.find({user_id: user.id}).lean().exec( function (err, skills) {
+                            if (err) {
+                                return res.status(500).send(err);
+                            }else{
+                                Educations.find({user_id: user.id}).lean().exec( function (err, edu) {
+                                    if (err) {
+                                        return res.status(500).send(err);
+                                    }else{
+                                         
+                                         var userForMap = JSON.parse(JSON.stringify(user));
+                                        const obj = Object.assign({experiences: exp, skills:skills, educations:edu }, userForMap);
+                                         return res.status(200).send({
+                                            message: 'Login successful',
+                                            success: true,
+                                            user: obj,
+                                            token: token
+                                        });
+                                    }
+                                    
+                                }) 
+                            }
+                            
+                        })
+                    }
+                    
+                });
            
         })(req, res, next);
     });

@@ -30,7 +30,50 @@
                 <button ui-sref="app.register" type="button" class="btn btn-primary btn-outline btn-share">Edit Profile</button>
             </div>
 
-         
+            <br>
+
+            <div class="experience-card">
+                <div class="experience-header">
+                    <h3 class="profile-experience-title">Experience</h3>
+                    <button type="button" data-toggle="modal" data-target="#myModal" style="height:30px; padding: 0; border: 0"><img ng-click="openExperiencePopup()" class="plus-image" style="margin-top: 0" src="../assets/images/plus_img.png"></button>
+
+                </div>
+                <div ng-repeat="experience in $root.user.experiences track by $index">
+                    <div class="the-experience">
+                        <div class="exp-header">
+                            <div class="exp-info">
+                                <h3 class="exp-title">{{experience.jobTitle}}</h3>
+                                <p class="exp-subtitle" ng-if="!experience.linkedTo">{{experience.companyName}}</p>
+                                <a ng-if="experience.linkedTo" ui-sref="app.company">{{experience.companyName}}</a>
+                                <p class="exp-duration">({{experience.dateFrom}} - {{experience.dateTo}})</p>
+                            </div>
+
+                            <div class="exp-buttons">
+                                <button type="button" class="btn btn-primary btn-outline btn-endo">Request Endorsement</button>
+                                <button type="button" class="btn btn-primary btn-outline btn-endo">Endorsements</button>
+                                <span ng-click="removeExperience($index)" class="glyphicon glyphicon-remove delete-exp-icon"></span>
+                            </div>
+
+
+                        </div>
+                        <div class="exp-description">{{experience.desc}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-showmore-wrapper">
+                    <button type="button" class="btn btn-primary btn-outline">Show More</button>
+                </div>
+
+            </div>
+
+          
+
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
 
         </div>
     </div>
