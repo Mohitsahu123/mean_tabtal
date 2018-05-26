@@ -33,6 +33,15 @@ tabtalent.controller('ProfileController', ['$http', '$scope', '$stateParams', '$
         }
     }
 
+    function dateEduChanged(e) {
+        var name = e.target.name;
+
+        if(name == 'datefromedu'){
+            $scope.education.dateFrom = e.target.value;
+        } else {
+            $scope.education.dateTo = e.target.value;
+        }
+    }
     
     $scope.addExperience = function () {
         if($scope.selectedCompany){
@@ -74,8 +83,27 @@ tabtalent.controller('ProfileController', ['$http', '$scope', '$stateParams', '$
         })
     };
 
-   
+    $scope.addEducation = function () {
+         $scope.education.user_id = $rootScope.user.id;
+        $http.post('/users/addEducation', $scope.education).then(function (res) {
+            $scope.education = res.data;
+            $rootScope.user.educations.push($scope.education);
+            localStorage.setItem('TabTalentUser', JSON.stringify($rootScope.user));
+            $scope.education = {};
+        })
+    };
 
-   
+    $scope.removeEducation = function (index) {
+        $http.post('/users/removeEducation', $rootScope.user.educations[index]).then(function (res) {
+            $rootScope.user.educations.splice(index, 1);
+            localStorage.setItem('TabTalentUser', JSON.stringify($rootScope.user));
+        })
+    };
+
+    $scope.getallCompanyData = function () {
+        $http.get('/company/getall').then(function (response) {
+            $scope.companies =  response.data;
+        })
+    };
     
 }]);

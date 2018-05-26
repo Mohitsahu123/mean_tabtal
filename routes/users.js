@@ -108,7 +108,7 @@ userRouter.route('/update')
     .put(function (req, res, next) {
         var exp = req.body.experiences;
         var expArr = [];
-       
+        
                     User.findOneAndUpdate({_id: req.body._id}, req.body, {new : true, upsert:true}, function (err, userRes) {
                         if (err) {
                             return res.status(500).send(err);
@@ -121,8 +121,7 @@ userRouter.route('/update')
                                   
                        
                     })
-               
-       
+              
     });
 
 userRouter.route('/addExperience')
@@ -164,7 +163,38 @@ userRouter.route('/addSkill')
        
     });
 
+userRouter.route('/addEducation')
 
+    .post(function (req, res, next) {
+        var body = req.body;
+        
+        Counters.getNextSequence('Educations', function(err, result){
+            body.id = result.seq;
+            console.log("\r\n\\n body ", body);
+            Educations.findOneAndUpdate({id: body.id}, body, {new : true, upsert:true}, function(err, eduRes){
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                res.status(200).send(eduRes);
+
+            })
+        })
+       
+    });
+
+userRouter.route('/removeEducation')
+
+    .post(function (req, res, next) {
+        var body = req.body;
+        
+            Educations.remove({id: parseInt(body.id)}, function(err, result){
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                res.status(200).send(result);
+
+            })
+    });
 
 userRouter.route('/removeExperience')
 
