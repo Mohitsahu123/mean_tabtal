@@ -6,7 +6,8 @@ var async               = require('async');
 var bodyParser = require('body-parser');
 var User = require('../models/user');
 var Counters = require('../models/counters');
-ar Verify = require('./verify');
+
+var Verify = require('./verify');
 var passport = require('passport');
 var ObjectId = require('mongodb').ObjectID;
 
@@ -44,6 +45,31 @@ userRouter.route('/signup')
         });
     });
 
+userRouter.route('/login')
+
+    .post(function (req, res, next) {
+        passport.authenticate('local', function (err, user, info) {
+            if (err) {
+                return res.status(500).send(err);
+            }
+
+           
+            req.logIn(user, function (err) {
+                if (err){
+                    return res.status(500).send(err);
+                }
+            });
+            var token = Verify.getToken({"username": user.username, "_id":user._id, "role": user.role});
+             var userForMap = JSON.parse(JSON.stringify(user));
+             return res.status(200).send({
+                message: 'Login successful',
+                success: true,
+                user: userForMap,
+                token: token
+            });
+           
+        })(req, res, next);
+    });
 
 
 module.exports = userRouter;
