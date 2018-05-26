@@ -1,0 +1,46 @@
+.btn-outline {
+    background-color: transparent !important;
+    color: #2A4AFF !important;
+    transition: all .5s !important;
+}
+.btn-primary  {
+    background-color: transparent !important;
+}
+
+.btn-primary.btn-outline {
+    color: #2A4AFF !important;
+}
+.btn-primary.btn-outline:hover {
+    color: #fff !important;
+    background-color: #2A4AFF !important;
+}
+
+.btn-primary.btn-outline:hover:focus {
+    color: #2A4AFF !important;
+}
+
+
+.signup-register-text {
+    line-height:13px;
+    margin-right:20px;
+    font-size: 15px;
+}
+
+.signup-form-wrapper {
+    margin-left: 130px;
+    margin-top: 200px;
+}
+
+.signup-form-wrapper-xs {
+    margin-top: 170px;
+}
+
+.signup-form-title {
+    color: #2A4AFF;
+    margin-bottom: 50px;
+}
+
+.signup-form {
+    width: 350px;
+
+}
