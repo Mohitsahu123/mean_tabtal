@@ -108,7 +108,25 @@ userRouter.route('/update')
     .put(function (req, res, next) {
         var exp = req.body.experiences;
         var expArr = [];
-        
+        async.eachSeries(exp, function(item, do_callback) {
+            Counters.getNextSequence('Experiences', function(err, result){
+                item.id = result.seq;
+                item.user_id = req.body.id;
+                Experiences.create(item, function(err1, result1){
+                    if (err1) {
+                        do_callback(err1)
+                    }else{
+                        expArr.push(result1);
+                        do_callback();
+                    }
+                })
+            });
+
+            }, function(error) {
+                if (error) {
+                    return res.status(500).send(err);
+                } else {
+                    delete req.body.experiences;
                     User.findOneAndUpdate({_id: req.body._id}, req.body, {new : true, upsert:true}, function (err, userRes) {
                         if (err) {
                             return res.status(500).send(err);
@@ -121,7 +139,9 @@ userRouter.route('/update')
                                   
                        
                     })
-              
+                }
+            });
+       
     });
 
 userRouter.route('/addExperience')
