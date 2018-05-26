@@ -5,6 +5,7 @@ var async               = require('async');
 
 var bodyParser = require('body-parser');
 var User = require('../models/user');
+var Counters = require('../models/counters');
 ar Verify = require('./verify');
 var passport = require('passport');
 var ObjectId = require('mongodb').ObjectID;
@@ -20,7 +21,8 @@ userRouter.route('/signup')
             if (err) {
                 return res.status(500).send(err);
             }
-           
+            Counters.getNextSequence('user', function(err1, result){
+                req.body.id = result.seq;
             User.findOneAndUpdate({_id : user._id}, req.body, {new : true, upsert:true}, function (err, user) {
                 if (err) {
                     User.remove({username: req.body.username}, function (err, result) {
@@ -38,7 +40,7 @@ userRouter.route('/signup')
                     });
                 });
             })
-            
+            })
         });
     });
 
