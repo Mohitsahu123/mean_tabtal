@@ -15,10 +15,19 @@ tabtalent.config(function ($stateProvider, $urlRouterProvider, $locationProvider
             }
         })
         
-      
-       
+        .state('app.register',{
+            url:'register',
+            views: {
+                'header': {
+                },
+                'content@': {
+                    templateUrl: '../template/register/register.component.html',
+                    controller: 'RegisterController'
+                }
+            }
+        })
 
-      
+       
 
     $locationProvider.html5Mode({
         enabled: true,
