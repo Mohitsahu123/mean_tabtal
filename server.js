@@ -10,6 +10,7 @@ var config = require('./config');
 
 
 var users = require('./routes/users');
+var company = require('./routes/company');
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -49,6 +50,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', users);
+app.use('/company', company);
 
 app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, '/public/index.html'));

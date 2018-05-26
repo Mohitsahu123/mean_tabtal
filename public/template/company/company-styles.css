@@ -1,0 +1,132 @@
+.btn-outline {
+    background-color: transparent !important;
+    color: #2A4AFF !important;
+    transition: all .5s !important;
+}
+.btn-primary  {
+    background-color: transparent !important;
+}
+
+.btn-primary.btn-outline {
+    color: #2A4AFF !important;
+}
+.btn-primary.btn-outline:hover {
+    color: #fff !important;
+    background-color: #2A4AFF !important;
+}
+
+.btn-primary.btn-outline:hover:focus {
+    color: #2A4AFF !important;
+}
+
+.btn-primary.focus, .btn-primary:focus {
+    background-color: transparent !important;
+    color: #2A4AFF !important;
+    transition: all .5s !important;
+}
+
+.my-card {
+    padding: 40px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 2px 1px rgb(223, 222, 222);
+    display: flex;
+    justify-content: space-between;
+    direction: row;
+}
+
+.my-card-2 {
+    padding: 40px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 2px 1px rgb(223, 222, 222);
+}
+
+.company-logo {
+    height: 120px;
+    width: 120px;
+    margin-left: 20px;
+}
+
+.company-logo-xs {
+    height: 120px;
+    width: 120px;
+}
+
+.company-details {
+    margin-left: 70px;
+}
+
+.company-info {
+    margin-left: 40px;
+    margin-top: -18px;
+    float: right;
+}
+
+.company-title {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.company-subtitle {
+    font-size: 20px;
+}
+
+.company-location {
+    font-size: 15px;
+    margin-top: -2px;
+}
+
+.btn-share {
+    align-self: flex-start;
+    margin-right: 35px;
+}
+
+.content {
+    margin-left: 70px;
+}
+
+.content-xs {
+    margin-left: 20px;
+}
+
+.description-title {
+    text-align: left;
+    color: #2A4AFF;
+}
+
+.description-text {
+    text-align: left;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.website-link-wrapper {
+    margin-top: 30px;
+    display: flex;
+    direction: row;
+}
+
+.desc-website {
+    font-size: 15px;
+}
+.website-link {
+    font-weight: bold;
+    color: #2A4AFF;
+    line-height: 36.5px;
+    margin-left: 6px;
+    font-size: 15px;
+}
+
+.industry-wrapper {
+    display: flex;
+    direction: row;
+}
+
+.desc-industry {
+    font-size: 15px;
+}
+
+.industry-text {
+    line-height: 36.5px;
+    margin-left: 6px;
+    font-size: 15px;
+}
