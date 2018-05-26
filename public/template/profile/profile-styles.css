@@ -90,3 +90,159 @@
     margin-right: 5px;
 }
 
+.profile-extra-wrapper {
+    font-size: 15px;
+    margin-top: 10px;
+    display: flex;
+    direction: row;
+    justify-content: flex-start;
+}
+
+.wallet-div {
+    border: 2px solid #0009FF;
+    border-radius: 8px;
+    background-color: #2A4AFF;
+    width: 140px;
+    height: 35px;
+    padding: 3px 3px;
+    display: flex;
+    direction: row;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.verified-div {
+    border: 2px solid #34D1BF;
+    border-radius: 8px;
+    background-color: #34D1BF;
+    width: 140px;
+    height: 35px;
+    padding: 3px 3px;
+    display: flex;
+    direction: row;
+    justify-content: center;
+}
+.extra-text {
+    color: #fff;
+    text-align: center;
+    margin-right: 5px;
+}
+
+.extra-value {
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+
+.btn-share {
+    align-self: flex-start;
+    margin-right: 35px;
+}
+
+.experience-card {
+    border-radius: 10px;
+    box-shadow: 0 0 2px 1px rgb(223, 222, 222);
+    padding: 30px 60px;
+}
+
+.experience-card-xs {
+    border-radius: 10px;
+    box-shadow: 0 0 2px 1px rgb(223, 222, 222);
+    padding: 30px 20px;
+}
+
+.profile-experience-title {
+    color: #2A4AFF;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.the-experience {
+    margin-top: 35px;
+}
+
+.exp-header {
+    display: flex;
+    direction: row;
+    justify-content: space-between;
+}
+
+.exp-info {
+    display: block;
+}
+
+.experience-header {
+    display: flex;
+    justify-content: space-between;    
+}
+
+.plus-image {
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+.delete-exp-icon {
+    font-size: 20px;
+    color: red;
+    margin-left: 15px;
+}
+
+.exp-buttons {
+    align-self: center;
+}
+
+.btn-endo {
+    width: 200px;
+    margin-left: 15px;
+}
+
+.exp-duration {
+    font-size: 13px;
+    margin-top: -5px;
+}
+
+.exp-description {
+    margin-top: 35px;
+    padding-bottom: 20px;
+    border-bottom: thin solid rgb(223, 222, 222);
+    white-space: pre-wrap;
+}
+
+.exp-description-xs {
+    margin-top: 35px;
+    padding-bottom: 20px;
+    white-space: pre-wrap;
+}
+
+.btn-showmore-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.skills-card {
+    padding: 40px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 2px 1px rgb(223, 222, 222);
+    padding: 30px 60px;
+    margin-top: 30px;
+}
+
+.skills-wrapper {
+    display: flex;
+    justify-content: row;
+    justify-content: space-between;
+}
+
+.the-skill {
+    border-radius: 30px;
+    box-shadow: 0 0 2px 1px rgb(223, 222, 222);
+    padding: 2px 27px;
+    height: 40px;
+}
+
+.skill-text {
+    padding-top: 7.5px;
+}
+

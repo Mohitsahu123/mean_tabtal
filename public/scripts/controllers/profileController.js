@@ -64,6 +64,18 @@ tabtalent.controller('ProfileController', ['$http', '$scope', '$stateParams', '$
         })
     };
     
-  
+    $scope.addSkill = function () {
+        $scope.skill.user_id = $rootScope.user.id;
+        $http.post('/users/addSkill', $scope.skill).then(function (res) {
+            $scope.skill = res.data;
+            $rootScope.user.skills.push($scope.skill);
+            localStorage.setItem('TabTalentUser', JSON.stringify($rootScope.user));
+            $scope.skill = {};
+        })
+    };
+
+   
+
+   
     
 }]);

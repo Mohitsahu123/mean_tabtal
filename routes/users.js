@@ -73,16 +73,29 @@ userRouter.route('/login')
                     if (err) {
                         return res.status(500).send(err);
                     }else{
-                                      
+                         Skills.find({user_id: user.id}).lean().exec( function (err, skills) {
+                            if (err) {
+                                return res.status(500).send(err);
+                            }else{
+                                Educations.find({user_id: user.id}).lean().exec( function (err, edu) {
+                                    if (err) {
+                                        return res.status(500).send(err);
+                                    }else{
+                                         
                                          var userForMap = JSON.parse(JSON.stringify(user));
-                                        const obj = Object.assign({experiences: exp }, userForMap);
+                                        const obj = Object.assign({experiences: exp, skills:skills, educations:edu }, userForMap);
                                          return res.status(200).send({
                                             message: 'Login successful',
                                             success: true,
                                             user: obj,
                                             token: token
                                         });
-                                  
+                                    }
+                                    
+                                }) 
+                            }
+                            
+                        })
                     }
                     
                 });
@@ -112,7 +125,60 @@ userRouter.route('/update')
        
     });
 
+userRouter.route('/addExperience')
 
+    .post(function (req, res, next) {
+        var body = req.body;
+        
+        Counters.getNextSequence('Experiences', function(err, result){
+            body.id = result.seq;
+            console.log("\r\n\\n body ", body);
+            Experiences.findOneAndUpdate({id: parseInt(body.id)}, body, {new : true, upsert:true}, function(err, expRes){
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                res.status(200).send(expRes);
+
+            })
+        })
+       
+    });
+
+userRouter.route('/addSkill')
+
+    .post(function (req, res, next) {
+        var body = req.body;
+        
+        Counters.getNextSequence('Skills', function(err, result){
+            body.id = result.seq;
+            console.log("\r\n\\n Skills ", Skills);
+            Skills.findOneAndUpdate({id: parseInt(body.id)}, body, {new : true, upsert:true}, function(err, skillRes){
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                console.log("skillRes ************ ", skillRes)
+                res.status(200).send(skillRes);
+
+            })
+        })
+       
+    });
+
+
+
+userRouter.route('/removeExperience')
+
+    .post(function (req, res, next) {
+        var body = req.body;
+        
+            Experiences.remove({id: parseInt(body.id)}, function(err, result){
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                res.status(200).send(result);
+
+            })
+    });
 
 
 module.exports = userRouter;

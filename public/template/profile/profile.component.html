@@ -84,20 +84,7 @@
                 </div>
             </div>
 
-            <div class="education-card">
-                <div class="experience-header">
-                    <h3 class="profile-experience-title">Education</h3>
-                    <button type="button" data-toggle="modal" data-target="#myEducationModal" style="height:30px; padding: 0; border: 0"><img ng-click="openEducationPopup()" class="plus-image" style="margin-top: 0" src="../assets/images/plus_img.png"></button>
-                </div>
-                <div class="education-info" ng-repeat="education in $root.user.educations">
-                    <h3 class="exp-title">{{education.college}}</h3>
-                    <p class="exp-subtitle">{{education.status}}, {{education.course}}, {{education.dateFrom}} - {{education.dateTo}}</p>
-                    <div class="exp-buttons">
-                        <span ng-click="removeEducation($index)" class="glyphicon glyphicon-remove delete-exp-icon" style="float: right; top: -20px;"></span>
-                    </div>
-                </div>
-
-            </div>
+          
 
             <br>
             <br>
@@ -173,7 +160,25 @@
 
             </div>
 
+            <div class="skills-card">
+                <div class="experience-header">
+                    <h3 class="profile-experience-title">Skills</h3>
+                    <button type="button" data-toggle="modal" data-target="#mySkillModal" style="height:30px; padding: 0; border: 0"><img class="plus-image" style="margin-top: 0" src="../assets/images/plus_img.png"></button>
+                </div>
+
+                <div>
+                    <div class="the-skill" ng-repeat="skill in $root.user.skills">
+                        <p class="skill-text">{{skill}}</p>
+                    </div>
+                </div>
+
+                <div class="btn-showmore-wrapper">
+                    <button type="button" class="btn btn-primary btn-outline">Show More</button>
+                </div>
+            </div>
+
            
+
             <br>
             <br>
             <br>
@@ -246,5 +251,32 @@
 
     </div>
 </div>
+
+
+
+<div id="mySkillModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <h3 class="profile-experience-title" style="margin-top: 20px">Add Skill</h3>
+
+                <div style="margin-bottom:10px;">
+                    <br>
+                    <div class="form-group">
+                        <label for="skill">Skill</label>
+                        <input type="text" class="form-control" ng-model='skill.name' name="name">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="addSkill()">Add</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 
 
